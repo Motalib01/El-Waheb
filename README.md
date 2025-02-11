@@ -1,6 +1,17 @@
 # El-Waheb
 
 ##  Overview
+**El-Waheb** is an application designed to facilitate and manage blood donation requests, donor information, and emergency blood availability. Built using ASP.NET Core and Entity Framework Core, the platform ensures a structured, scalable, and efficient system for connecting blood donors with recipients in need.
+
+Key Features
+ Blood Donation Requests: Users can create and manage blood donation requests based on urgency and location.
+ Donor Management: A structured database for storing donor details, blood types, and availability.
+ Location-Based Search: Helps recipients find the nearest donors or blood banks.
+ Notifications System: Sends alerts to registered donors when a matching blood request is made.
+ Secure & Scalable Architecture: Uses modern development practices to ensure high performance and data integrity.
+
+El-Waheb aims to make blood donation easier, faster, and more accessible, ultimately saving lives through technology.
+
 **El-Waheb** is an application built using **ASP.NET Core** and **Entity Framework Core**. The project follows the **repository pattern** and **unit of work pattern**  to ensure scalability and maintainability.
 
 ##  Tech Stack
