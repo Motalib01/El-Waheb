@@ -1,0 +1,6 @@
+@ElWaheb.Api_HostAddress = http://localhost:5016
+
+GET {{ElWaheb.Api_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
