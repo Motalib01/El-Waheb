@@ -8,5 +8,6 @@ namespace ElWaheb.Api.Servises
     {
         Task<AuthResponse?> LoginAsync(AuthRequest model);
         Task<IdentityResult> RegisterAsync(RequestsResponses.RegisterRequest model);
+        Task<IdentityResult> UpdateProfileAsync(string userId, UpdateProfileRequest model);
     }
 }

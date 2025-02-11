@@ -30,9 +30,50 @@ namespace ElWaheb.Api.Servises
 
         public async Task<IdentityResult> RegisterAsync(RegisterRequest model)
         {
-            var user = new User { UserName = model.Email, Email = model.Email, FullName = model.FullName };
+            var user = new User { UserName = model.Email, Email = model.Email, FullName = model.FullName,
+            BirthDate=model.BirthDate, BloodType=model.BloodType, PhoneNumber=model.PhoneNumber};
             return await _userManager.CreateAsync(user, model.Password);
         }
+
+        public async Task<IdentityResult> UpdateProfileAsync(string userId, UpdateProfileRequest model)
+        {
+            var user = await _userManager.FindByIdAsync(userId);
+            if (user == null) return IdentityResult.Failed(new IdentityError { Description = "User not found" });
+
+            // Update Full Name
+            if (!string.IsNullOrEmpty(model.FullName))
+                user.FullName = model.FullName;
+
+            // Update Email
+            if (!string.IsNullOrEmpty(model.Email))
+            {
+                var existingUser = await _userManager.FindByEmailAsync(model.Email);
+                if (existingUser != null && existingUser.Id != user.Id)
+                    return IdentityResult.Failed(new IdentityError { Description = "Email already in use" });
+
+                user.Email = model.Email;
+                user.UserName = model.Email; // Ensure email-based username consistency
+            }
+
+            // Update Phone Number
+            if (!string.IsNullOrEmpty(model.PhoneNumber))
+                user.PhoneNumber = model.PhoneNumber;
+
+            // Update Password (if provided)
+            if (!string.IsNullOrEmpty(model.CurrentPassword) && !string.IsNullOrEmpty(model.NewPassword))
+            {
+                var checkPassword = await _userManager.CheckPasswordAsync(user, model.CurrentPassword);
+                if (!checkPassword)
+                    return IdentityResult.Failed(new IdentityError { Description = "Current password is incorrect" });
+
+                var passwordResult = await _userManager.ChangePasswordAsync(user, model.CurrentPassword, model.NewPassword);
+                if (!passwordResult.Succeeded)
+                    return passwordResult;
+            }
+
+            return await _userManager.UpdateAsync(user);
+        }
+
 
         private string GenerateJwtToken(User user)
         {

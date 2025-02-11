@@ -14,10 +14,7 @@ namespace ElWaheb.Api.Configurations
             builder.Property(dr => dr.Status).IsRequired().HasMaxLength(50);
             builder.Property(dr => dr.UserId).IsRequired();
 
-            builder.HasOne(dr => dr.User)
-                .WithMany(u => u.DonationRequests)
-                .HasForeignKey(dr => dr.UserId)
-                .OnDelete(DeleteBehavior.Cascade);
+            
         }
     }
 }

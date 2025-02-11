@@ -23,6 +23,7 @@ namespace ElWaheb.Api
             builder.Services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
             builder.Services.AddScoped<IUnitOfWork, UnitOfWork.UnitOfWork>();
             builder.Services.AddScoped<IDonationRequestService, DonationRequestService>();
+            builder.Services.AddScoped<IAuthService, AuthService>();
 
             builder.Services.AddIdentity<User, IdentityRole>()
                 .AddEntityFrameworkStores<ApplicationDbContext>()

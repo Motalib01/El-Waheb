@@ -14,8 +14,13 @@ namespace ElWaheb.Api.Configurations
             builder.Property(u => u.PhoneNumber).IsRequired().HasMaxLength(50);
             builder.HasIndex(u => u.Email).IsUnique();
             builder.Property(u => u.Email).IsRequired().HasMaxLength(100);            
-            builder.Property(u => u.LocationId).IsRequired().HasMaxLength(50);
+            builder.Property(u => u.LocationId).HasMaxLength(50);
             builder.Property(u => u.BloodType).IsRequired().HasMaxLength(50);
+
+            builder.HasMany(u => u.DonationRequests)
+                .WithOne(dr => dr.User)
+                .HasForeignKey(dr => dr.UserId)
+                .OnDelete(DeleteBehavior.Cascade);
 
         }
     }

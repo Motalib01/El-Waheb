@@ -2,6 +2,7 @@
 using ElWaheb.Api.Servises;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System.Security.Claims;
 
 namespace ElWaheb.Api.Controllers
 {
@@ -34,6 +35,26 @@ namespace ElWaheb.Api.Controllers
                 return Unauthorized("Invalid credentials");
 
             return Ok(response);
+        }
+
+        [HttpPut("update-profile")]
+        public async Task<IActionResult> UpdateProfile([FromBody] UpdateProfileRequest request)
+        {
+            if (!User.Identity.IsAuthenticated)
+                return Unauthorized("User is not authenticated");
+
+            var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+
+
+            if (string.IsNullOrEmpty(userId))
+                return Unauthorized("Invalid user");
+
+            var result = await _authService.UpdateProfileAsync(userId, request);
+
+            if (!result.Succeeded)
+                return BadRequest(result.Errors);
+
+            return Ok("Profile updated successfully.");
         }
     }
 }

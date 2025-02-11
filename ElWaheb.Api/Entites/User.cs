@@ -14,7 +14,7 @@ namespace ElWaheb.Api.Entites
         public List<DonationRequest> DonationRequests { get; set; }
         public List<Notification> Notifications { get; set; }
 
-        public Guid LocationId { get; set; }
+        public Guid? LocationId { get; set; }
         public Location Location { get; set; }
 
     }
