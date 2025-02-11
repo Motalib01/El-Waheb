@@ -2,8 +2,13 @@
 using ElWaheb.Api.Data;
 using ElWaheb.Api.Entites;
 using ElWaheb.Api.Repositores;
+using ElWaheb.Api.Servises;
 using ElWaheb.Api.UnitOfWork;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
 
 namespace ElWaheb.Api
 {
@@ -16,8 +21,35 @@ namespace ElWaheb.Api
             // Add services to the container.
             
             builder.Services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
-
             builder.Services.AddScoped<IUnitOfWork, UnitOfWork.UnitOfWork>();
+            builder.Services.AddScoped<IDonationRequestService, DonationRequestService>();
+
+            builder.Services.AddIdentity<User, IdentityRole>()
+                .AddEntityFrameworkStores<ApplicationDbContext>()
+                .AddDefaultTokenProviders();
+
+            builder.Services.AddAuthentication(options =>
+            {
+                options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+            })
+            .AddJwtBearer(options =>
+            {
+                options.RequireHttpsMetadata = false;
+                options.SaveToken = true;
+                options.TokenValidationParameters = new TokenValidationParameters
+                {
+                    ValidateIssuer = true,
+                    ValidateAudience = true,
+                    ValidateLifetime = true,
+                    ValidateIssuerSigningKey = true,
+                    ValidIssuer = builder.Configuration["Jwt:Issuer"],
+                    ValidAudience = builder.Configuration["Jwt:Audience"],
+                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["Jwt:SecretKey"]))
+                };
+            });
+
+            builder.Services.AddAuthorization();
 
 
             builder.Services.AddDbContext<ApplicationDbContext>(options =>

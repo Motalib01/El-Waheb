@@ -8,15 +8,19 @@ namespace ElWaheb.Api.UnitOfWork
     public class UnitOfWork: IUnitOfWork
     {
         private readonly DbContext _context;
-        public IRepository<User> Users { get; }
+        //public IRepository<User> Users { get; }
         public IRepository<Notification> Notifications { get; }
+        public IRepository<Location> Locations { get; }
+        public IRepository<DonationRequest> DonationRequests { get; }
 
 
         public UnitOfWork(ApplicationDbContext context)
         {
             _context = context;
-            Users = new Repository<User>(context);
+            //Users = new Repository<User>(context);
             Notifications = new Repository<Notification>(context);
+            Locations = new Repository<Location>(context);
+            DonationRequests = new Repository<DonationRequest>(context);
         }
 
         public async Task<int> SaveChangesAsync() => await _context.SaveChangesAsync();
