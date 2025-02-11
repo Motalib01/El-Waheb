@@ -1,12 +1,12 @@
 # El-Waheb
 
 ##  Overview
-**El-Waheb** is a modern web application built using **ASP.NET Core** and **Entity Framework Core** with a well-structured database context and best practices for managing entity configurations. The project follows the **repository pattern** and **clean architecture principles** to ensure scalability and maintainability.
+**El-Waheb** is an application built using **ASP.NET Core** and **Entity Framework Core**. The project follows the **repository pattern** and **unit of work pattern**  to ensure scalability and maintainability.
 
 ##  Tech Stack
 - **Backend:** ASP.NET Core Web API
 - **ORM:** Entity Framework Core
-- **Database:** SQL Server / PostgreSQL (Configurable)
+- **Database:** SQL Server
 - **Dependency Injection:** Built-in .NET Core DI container
 
 ##  Project Structure
@@ -20,7 +20,7 @@
    │      │      ├── LocationConfiguration.cs
    │      │      ├── DonationRequestConfiguration.cs
    │
-   ├── Models
+   ├── Entities
    │      ├── User.cs
    │      ├── Notification.cs
    │      ├── Location.cs
@@ -77,5 +77,4 @@ Feel free to fork this repository and contribute by creating a pull request.
 This project is licensed under the **MIT License**.
 
 ---
- **El-Waheb – Simplifying Entity Management with Best Practices!** 
 
