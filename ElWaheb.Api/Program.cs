@@ -2,7 +2,7 @@
 using ElWaheb.Api.Data;
 using ElWaheb.Api.Entites;
 using ElWaheb.Api.Repositores;
-using ElWaheb.Api.Servises;
+using ElWaheb.Api.Services;
 using ElWaheb.Api.UnitOfWork;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
@@ -21,8 +21,12 @@ namespace ElWaheb.Api
             // Add services to the container.
             
             builder.Services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
+
             builder.Services.AddScoped<IUnitOfWork, UnitOfWork.UnitOfWork>();
+
             builder.Services.AddScoped<IDonationRequestService, DonationRequestService>();
+            builder.Services.AddScoped<ILocationService, LocationService>();
+            builder.Services.AddScoped<INotificationService, NotificationService>();
             builder.Services.AddScoped<IAuthService, AuthService>();
 
             builder.Services.AddIdentity<User, IdentityRole>()

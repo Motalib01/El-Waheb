@@ -6,7 +6,7 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
 
-namespace ElWaheb.Api.Servises
+namespace ElWaheb.Api.Services
 {
     public class AuthService : IAuthService
     {

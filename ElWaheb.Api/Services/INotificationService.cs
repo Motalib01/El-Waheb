@@ -1,6 +1,6 @@
 ﻿using ElWaheb.Api.Entites;
 
-namespace ElWaheb.Api.Servises
+namespace ElWaheb.Api.Services
 {
     public interface INotificationService
     {

@@ -1,7 +1,7 @@
 ﻿using ElWaheb.Api.Entites;
 using ElWaheb.Api.UnitOfWork;
 
-namespace ElWaheb.Api.Servises
+namespace ElWaheb.Api.Services
 {
     public class DonationRequestService : IDonationRequestService
     {

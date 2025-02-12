@@ -1,5 +1,5 @@
 ﻿using ElWaheb.Api.Entites;
-using ElWaheb.Api.Servises;
+using ElWaheb.Api.Services;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
