@@ -19,7 +19,23 @@ namespace ElWaheb.Api
             var builder = WebApplication.CreateBuilder(args);
 
             // Add services to the container.
-            
+
+            builder.Services.AddCors(options =>
+            {
+                options.AddPolicy("AllowMobileApp",
+                    policy =>
+                    {
+                        options.AddPolicy("AllowAll",
+                            policy =>
+                            {
+                                policy.AllowAnyOrigin()
+                                      .AllowAnyMethod()
+                                      .AllowAnyHeader();
+                            });
+                    });
+            });
+
+
             builder.Services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
 
             builder.Services.AddScoped<IUnitOfWork, UnitOfWork.UnitOfWork>();
@@ -77,6 +93,8 @@ namespace ElWaheb.Api
             builder.Services.AddSwaggerGen();
 
             var app = builder.Build();
+
+            app.UseCors("AllowMobileApp");
 
             // Configure the HTTP request pipeline.
             if (app.Environment.IsDevelopment())
