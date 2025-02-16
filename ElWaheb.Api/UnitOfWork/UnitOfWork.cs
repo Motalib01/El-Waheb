@@ -17,7 +17,7 @@ namespace ElWaheb.Api.UnitOfWork
         public UnitOfWork(ApplicationDbContext context)
         {
             _context = context;
-            //Users = new Repository<User>(context);
+            Users = new UserRepository(context);
             Notifications = new Repository<Notification>(context);
             Locations = new Repository<Location>(context);
             DonationRequests = new Repository<DonationRequest>(context);

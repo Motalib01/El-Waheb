@@ -22,6 +22,7 @@ namespace ElWaheb.Api.Services
         public async Task<GetUserRequestResponse?> GetUserByIdAsync(string userId)
         {
             var user = await _userManager.FindByIdAsync(userId);
+
             if (user == null)
                 return null;
 

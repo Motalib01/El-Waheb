@@ -1,5 +1,6 @@
 ﻿using ElWaheb.Api.RequestsResponses;
 using ElWaheb.Api.Services;
+using ElWaheb.Api.UnitOfWork;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
@@ -11,16 +12,18 @@ namespace ElWaheb.Api.Controllers
     public class AuthController : ControllerBase
     {
         private readonly IAuthService _authService;
+        private readonly IUnitOfWork _unitOfWork;
 
-        public AuthController(IAuthService authService)
+        public AuthController(IAuthService authService, IUnitOfWork unitOfWork)
         {
             _authService = authService;
+            _unitOfWork = unitOfWork;
         }
 
-        [HttpGet("{Id}/ get-user-by-id")]
-        public async Task<IActionResult> GetUserById(string Id)
+        [HttpGet("{Id}/get-user-by-id")]
+        public async Task<IActionResult> GetUser(Guid Id)
         {
-            var user = await _authService.GetUserByIdAsync(Id);
+            var user = await _unitOfWork.Users.GetByIdAsync(Id);
             if (user == null)
                 return NotFound("User not found");
             return Ok(user);
