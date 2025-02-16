@@ -3,7 +3,7 @@ using ElWaheb.Api.UnitOfWork;
 
 namespace ElWaheb.Api.Services
 {
-    public class DonationRequestService
+    public class DonationRequestService: IDonationRequestService
     {
         private readonly IUnitOfWork _unitOfWork;
 
@@ -44,7 +44,7 @@ namespace ElWaheb.Api.Services
 
         private double CalculateDistance(double lat1, double lon1, double lat2, double lon2)
         {
-            const double R = 6371; // Earth radius in km
+            const double R = 6371;
             var dLat = ToRadians(lat2 - lat1);
             var dLon = ToRadians(lon2 - lon1);
             var a = Math.Sin(dLat / 2) * Math.Sin(dLat / 2) +
