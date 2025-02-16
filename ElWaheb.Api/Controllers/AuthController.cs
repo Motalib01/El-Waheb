@@ -17,6 +17,15 @@ namespace ElWaheb.Api.Controllers
             _authService = authService;
         }
 
+        [HttpGet("{Id}/ get-user-by-id")]
+        public async Task<IActionResult> GetUserById(string Id)
+        {
+            var user = await _authService.GetUserByIdAsync(Id);
+            if (user == null)
+                return NotFound("User not found");
+            return Ok(user);
+        }
+
         [HttpPost("register")]
         public async Task<IActionResult> Register([FromBody] RegisterRequest request)
         {

@@ -9,5 +9,8 @@ namespace ElWaheb.Api.Services
         Task<AuthResponse?> LoginAsync(AuthRequest model);
         Task<IdentityResult> RegisterAsync(RequestsResponses.RegisterRequest model);
         Task<IdentityResult> UpdateProfileAsync(string userId, UpdateProfileRequest model);
+        Task<GetUserRequestResponse?> GetUserByIdAsync(string userId);
+        //TODO: Add ChangePasswordAsync method
+        //Task<IdentityResult> ChangePasswordAsync(string userId, ChangePasswordRequest model);
     }
 }

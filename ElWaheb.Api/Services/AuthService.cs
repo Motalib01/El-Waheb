@@ -18,6 +18,24 @@ namespace ElWaheb.Api.Services
             _userManager = userManager;
             _configuration = configuration;
         }
+
+        public async Task<GetUserRequestResponse?> GetUserByIdAsync(string userId)
+        {
+            var user = await _userManager.FindByIdAsync(userId);
+            if (user == null)
+                return null;
+
+            return new GetUserRequestResponse 
+            {   
+                FullName= user.FullName,
+                Email = user.Email,
+                PhoneNumber = user.PhoneNumber,
+                BirthDate = user.BirthDate
+            };
+
+        }
+
+
         public async Task<AuthResponse?> LoginAsync(AuthRequest model)
         {
             var user = await _userManager.FindByEmailAsync(model.Email);
