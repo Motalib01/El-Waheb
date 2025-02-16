@@ -17,7 +17,7 @@ namespace ElWaheb.Api.Services
             await _unitOfWork.SaveChangesAsync();
         }
 
-        public async Task<bool> DeleteNotificationAsync(int id)
+        public async Task<bool> DeleteNotificationAsync(Guid id)
         {
             var notification = await _unitOfWork.Notifications.GetByIdAsync(id);
             if (notification == null)
@@ -29,6 +29,6 @@ namespace ElWaheb.Api.Services
 
         public async Task<IEnumerable<Notification>> GetAllNotificationsAsync()=> await _unitOfWork.Notifications.GetAllAsync();
 
-        public async Task<Notification> GetNotificationByIdAsync(int id)=> await _unitOfWork.Notifications.GetByIdAsync(id);
+        public async Task<Notification> GetNotificationByIdAsync(Guid id)=> await _unitOfWork.Notifications.GetByIdAsync(id);
     }
 }

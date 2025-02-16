@@ -17,7 +17,7 @@ namespace ElWaheb.Api.Services
             await _unitOfWork.SaveChangesAsync();
         }
 
-        public async Task<bool> DeleteLocationAsync(int id)
+        public async Task<bool> DeleteLocationAsync(Guid id)
         {
             var location = await _unitOfWork.Locations.GetByIdAsync(id);
             if (location == null)
@@ -29,6 +29,6 @@ namespace ElWaheb.Api.Services
 
         public async Task<IEnumerable<Location>> GetAllLocationsAsync()=> await _unitOfWork.Locations.GetAllAsync();
 
-        public async Task<Location> GetLocationByIdAsync(int id)=> await _unitOfWork.Locations.GetByIdAsync(id);
+        public async Task<Location> GetLocationByIdAsync(Guid id)=> await _unitOfWork.Locations.GetByIdAsync(id);
     }
 }

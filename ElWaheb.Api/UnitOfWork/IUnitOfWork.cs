@@ -6,7 +6,7 @@ namespace ElWaheb.Api.UnitOfWork
     public interface IUnitOfWork: IDisposable
     {
         //repositories
-        //IRepository<User> Users { get; }
+        IUserRepository Users { get; }
         IRepository<Notification> Notifications { get; }
         IRepository<DonationRequest> DonationRequests { get; }
         IRepository<Location> Locations { get; }

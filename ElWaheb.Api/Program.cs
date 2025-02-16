@@ -1,6 +1,7 @@
 
 using ElWaheb.Api.Data;
 using ElWaheb.Api.Entites;
+using ElWaheb.Api.Extentions;
 using ElWaheb.Api.Repositores;
 using ElWaheb.Api.Services;
 using ElWaheb.Api.UnitOfWork;
@@ -22,21 +23,18 @@ namespace ElWaheb.Api
 
             builder.Services.AddCors(options =>
             {
-                options.AddPolicy("AllowMobileApp",
-                    policy =>
-                    {
-                        options.AddPolicy("AllowAll",
-                            policy =>
-                            {
-                                policy.AllowAnyOrigin()
-                                      .AllowAnyMethod()
-                                      .AllowAnyHeader();
-                            });
-                    });
+                options.AddPolicy("AllowAll", policy =>
+                {
+                    policy.AllowAnyOrigin()
+                          .AllowAnyMethod()
+                          .AllowAnyHeader();
+                });
             });
 
+            builder.Services.AddAutoMapper(typeof(MappingProfiles).Assembly);
 
             builder.Services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
+            builder.Services.AddScoped<IUserRepository, UserRepository>();
 
             builder.Services.AddScoped<IUnitOfWork, UnitOfWork.UnitOfWork>();
 
@@ -94,14 +92,9 @@ namespace ElWaheb.Api
 
             var app = builder.Build();
 
-            app.UseCors("AllowMobileApp");
+            app.UseCors("AllowAll");
 
-            // Configure the HTTP request pipeline.
-            if (app.Environment.IsDevelopment())
-            {
-                app.UseSwagger();
-                app.UseSwaggerUI();
-            }
+            // Configure the HTTP request pipeline. 
             
             app.UseSwagger();
             app.UseSwaggerUI();
@@ -109,6 +102,7 @@ namespace ElWaheb.Api
 
             app.UseHttpsRedirection();
 
+            app.UseAuthentication();
             app.UseAuthorization();
 
 

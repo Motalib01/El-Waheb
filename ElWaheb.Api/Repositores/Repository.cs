@@ -14,9 +14,9 @@ namespace ElWaheb.Api.Repositores
             _context = context;
             _dbSet = context.Set<T>();
         }
-        public async Task<IEnumerable<T>> GetAllAsync() => await _dbSet.ToListAsync();
+        public async Task<IEnumerable<T>> GetAllAsync() => await _dbSet.AsNoTracking().ToListAsync();
 
-        public async Task<T> GetByIdAsync(int id) => await _dbSet.FindAsync(id);
+        public async Task<T> GetByIdAsync(Guid id) => await _dbSet.AsNoTracking().FirstOrDefaultAsync(e =>e.Id == id);
 
         public async Task AddAsync(T entity) => await _dbSet.AddAsync(entity);
 

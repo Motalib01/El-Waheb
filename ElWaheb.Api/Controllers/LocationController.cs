@@ -23,7 +23,7 @@ namespace ElWaheb.Api.Controllers
         }
 
         [HttpGet("{id}")]
-        public async Task<Location> GetLocationByIdAsync(int id)
+        public async Task<Location> GetLocationByIdAsync(Guid id)
         {
             return await locationService.GetLocationByIdAsync(id);
         }
@@ -36,7 +36,7 @@ namespace ElWaheb.Api.Controllers
         }
 
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteLocationAsync(int id)
+        public async Task<IActionResult> DeleteLocationAsync(Guid id)
         {
             var result = await locationService.DeleteLocationAsync(id);
             if (result)

@@ -30,7 +30,7 @@ namespace ElWaheb.Api.Controllers
         }
 
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteNotificationAsync(int id)
+        public async Task<IActionResult> DeleteNotificationAsync(Guid id)
         {
             var result = await _notificationService.DeleteNotificationAsync(id);
             if (result)

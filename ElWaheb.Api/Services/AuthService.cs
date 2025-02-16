@@ -31,7 +31,7 @@ namespace ElWaheb.Api.Services
         public async Task<IdentityResult> RegisterAsync(RegisterRequest model)
         {
             var user = new User { UserName = model.Email, Email = model.Email, FullName = model.FullName,
-            BirthDate=model.BirthDate, BloodType=model.BloodType, PhoneNumber=model.PhoneNumber};
+            BirthDate=model.BirthDate, PhoneNumber=model.PhoneNumber};
             return await _userManager.CreateAsync(user, model.Password);
         }
 
