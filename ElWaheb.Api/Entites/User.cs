@@ -6,16 +6,18 @@ namespace ElWaheb.Api.Entites
     {
         public string FullName { get; set; }
         public DateOnly BirthDate { get; set; }
+        public double Latitude { get; set; }
+        public double Longitude { get; set; }
         //public string PhoneNumber { get; set; }
         //public string Email { get; set; }
-        
+
         //public string password { get; set; }
 
         public List<DonationRequest> DonationRequests { get; set; }
         public List<Notification> Notifications { get; set; }
 
-        public Guid? LocationId { get; set; }
-        public Location Location { get; set; }
+        //public Guid? LocationId { get; set; }
+        //public Location Location { get; set; }
 
     }
 }
