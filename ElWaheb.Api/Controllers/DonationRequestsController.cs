@@ -9,9 +9,9 @@ namespace ElWaheb.Api.Controllers
     [ApiController]
     public class DonationRequestsController : ControllerBase
     {
-        private readonly DonationRequestService _donationRequestService;
+        private readonly IDonationRequestService _donationRequestService;
 
-        public DonationRequestsController(DonationRequestService donationRequestService)
+        public DonationRequestsController(IDonationRequestService donationRequestService)
         {
             _donationRequestService = donationRequestService;
         }

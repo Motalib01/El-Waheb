@@ -14,6 +14,7 @@ namespace ElWaheb.Api.Configurations
             builder.Property(n => n.SentAt).IsRequired();
             builder.Property(n => n.IsRead).IsRequired();
 
+
             builder.HasOne(n => n.User)
                .WithMany(u => u.Notifications)
                .HasForeignKey(n => n.UserId)

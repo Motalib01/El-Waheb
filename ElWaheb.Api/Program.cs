@@ -38,7 +38,7 @@ namespace ElWaheb.Api
 
             builder.Services.AddScoped<IUnitOfWork, UnitOfWork.UnitOfWork>();
 
-            //builder.Services.AddScoped<IDonationRequestService, DonationRequestService>();
+            builder.Services.AddScoped<IDonationRequestService, DonationRequestService>();
             builder.Services.AddScoped<ILocationService, LocationService>();
             builder.Services.AddScoped<INotificationService, NotificationService>();
             builder.Services.AddScoped<IAuthService, AuthService>();

@@ -14,10 +14,10 @@ namespace ElWaheb.Api.Configurations
             builder.Property(l => l.State).IsRequired().HasMaxLength(50);
             builder.Property(l => l.City).IsRequired().HasMaxLength(50);
 
-            builder.HasMany(l => l.Users)
-                .WithOne(u => u.Location)
-                .HasForeignKey(u => u.LocationId)
-                .OnDelete(DeleteBehavior.Cascade);
+            //builder.HasMany(l => l.Users)
+            //    .WithOne(u => u.Location)
+            //    .HasForeignKey(u => u.LocationId)
+            //    .OnDelete(DeleteBehavior.Cascade);
 
         }
     }
